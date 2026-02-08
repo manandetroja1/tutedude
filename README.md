@@ -1,0 +1,1 @@
+So in this assessment one, I have completed two codes. First code in Python is for addition, subtraction, multiplication, and division. And second code is for merging a string by two names, first name and second name.
