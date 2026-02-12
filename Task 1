@@ -1,41 +1,65 @@
 import psycopg2
+from datetime import datetime
 
-def  table():
-    conn = psycopg2.connect(dbname="postgres",user="postgres",password="admin",host="localhost",port="5432")
+try:
+    # Connect to PostgreSQL
+    conn = psycopg2.connect(
+        host="localhost",
+        database="studentdb",
+        user="postgres",
+        password="your_password"   # change this
+    )
 
-    cursor = conn.cursor()
-    cursor.execute('''create table employees(Name Text, ID Int, Age Int);''')
-    print('Table Created Successfully')
+    cur = conn.cursor()
 
+    print("Connected to database successfully")
+    print("Timestamp:", datetime.now())
+
+    # 1. Create table
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS students (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(50),
+            age INT
+        )
+    """)
     conn.commit()
+    print("\nTable created or already exists.")
+
+    # 2. Insert records
+    cur.execute("INSERT INTO students (name, age) VALUES (%s, %s)", ("Alice", 20))
+    cur.execute("INSERT INTO students (name, age) VALUES (%s, %s)", ("Bob", 22))
+    conn.commit()
+    print("Records inserted.")
+
+    # 3. Read records
+    print("\nStudent Records:")
+    cur.execute("SELECT * FROM students")
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
+
+    # 4. Update record
+    cur.execute("UPDATE students SET age = %s WHERE name = %s", (23, "Bob"))
+    conn.commit()
+    print("\nRecord updated (Bob's age set to 23).")
+
+    # 5. Delete record
+    cur.execute("DELETE FROM students WHERE name = %s", ("Alice",))
+    conn.commit()
+    print("Record deleted (Alice).")
+
+    # 6. Final data
+    print("\nFinal Student Records:")
+    cur.execute("SELECT * FROM students")
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
+
+    # Close connection
+    cur.close()
     conn.close()
+    print("\nDatabase connection closed.")
 
-def  data():
-    conn = psycopg2.connect(dbname="postgres",user="postgres",password="admin",host="localhost",port="5432")
-
-    cursor = conn.cursor()
-
-    name = input("Enter the name of the employee: ")
-    id = input("Enter ID number of the employee:: ")
-    age = input("Enter age of the employee: ")
-
-    query = '''insert into employees(Name, ID, Age) values(%s,%s,%s);'''
-
-    cursor.execute(query, (name,id,age))
-    print('Data Added Successfully')
-
-    conn.commit()
-    conn.close()
-
-data()
-
-"""def  extract():
-    conn = psycopg2.connect(dbname="postgres",user="postgres",password="admin",host="localhost",port="5432")
-
-    cursor = conn.cursor()
-    cursor.execute('''select * from employees;''')
-    show = cursor.fetchone()
-    print(show[0])
-
-    conn.commit()
-    conn.close()"""
+except Exception as e:
+    print("Error:", e)
