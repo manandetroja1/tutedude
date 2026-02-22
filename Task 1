@@ -1,0 +1,18 @@
+# Task 1: Student marks dictionary
+
+# Create dictionary
+students = {
+    "Manan": 85,
+    "Rahul": 78,
+    "Priya": 92,
+    "Amit": 74
+}
+
+# Take input
+name = input("Enter student name: ")
+
+# Retrieve marks
+if name in students:
+    print(name, "marks:", students[name])
+else:
+    print("Student not found in record.")
