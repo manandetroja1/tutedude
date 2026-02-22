@@ -1,0 +1,10 @@
+# Assignment 4 - Files, Exceptions, and Errors in Python
+
+## Task 1: Read File with Error Handling
+This program reads a file named sample.txt and prints its content line by line. It handles errors if the file does not exist.
+
+## Task 2: Write and Append to File
+This program takes user input, writes it to output.txt, appends additional data, and displays the final content.
+
+## Technologies Used
+- Python
