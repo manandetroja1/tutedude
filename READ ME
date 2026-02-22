@@ -1,0 +1,10 @@
+# Assignment 3 - Functions & Modules in Python
+
+## Task 1: Factorial Function
+This program defines a function to calculate factorial using a loop and returns the result.
+
+## Task 2: Math Module Calculations
+This program takes user input and uses the math module to calculate square root, natural logarithm, and sine of the number.
+
+## Technologies Used
+- Python
