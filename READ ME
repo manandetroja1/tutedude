@@ -1,0 +1,10 @@
+# Assignment 5 - Data Structures and Strings in Python
+
+## Task 1: Student Marks Dictionary
+This program creates a dictionary of student marks and retrieves marks based on user input.
+
+## Task 2: List Slicing
+This program creates a list from 1 to 10, extracts the first five elements, reverses them, and prints both lists.
+
+## Technologies Used
+- Python
