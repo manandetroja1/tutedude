@@ -1,0 +1,70 @@
+1. Requests Basics
+
+Sending GET request
+
+Checking status codes
+
+{import requests
+response = requests.get("https://example.com")
+print(response.status_code)}
+
+
+2. BeautifulSoup Parsing
+
+Parsing HTML
+
+Using find() and find_all()
+
+
+
+3. Extract Data
+
+Titles
+
+Paragraphs
+
+Links (<a> tags)
+
+Images (<img>)
+
+
+
+4. Table Scraping
+
+Extract table rows
+
+Convert into structured format
+
+
+
+5. Pagination Handling
+
+Loop through pages
+
+Collect data from multiple pages
+
+
+
+6. Save Data
+
+CSV (pandas or csv)
+
+JSON
+
+
+
+7. Headers (IMPORTANT)
+
+Use User-Agent to avoid blocking
+
+{headers = {"User-Agent": "Mozilla/5.0"}
+requests.get(url, headers=headers)}
+
+
+8. Error Handling
+
+Handle:
+
+connection errors
+
+missing elements
