@@ -1,0 +1,16 @@
+# Task 2: Using math module
+
+import math
+
+try:
+    num = float(input("Enter a number: "))
+
+    if num <= 0:
+        print("Logarithm only defined for positive numbers")
+    else:
+        print("Square root:", math.sqrt(num))
+        print("Natural logarithm:", math.log(num))
+        print("Sine (radians):", math.sin(num))
+
+except ValueError:
+    print("Invalid input! Please enter a number.")
