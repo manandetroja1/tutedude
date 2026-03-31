@@ -1,0 +1,65 @@
+import psycopg2
+from datetime import datetime
+
+try:
+    # Connect to PostgreSQL
+    conn = psycopg2.connect(
+        host="localhost",
+        database="studentdb",
+        user="postgres",
+        password="your_password"   # change this
+    )
+
+    cur = conn.cursor()
+
+    print("Connected to database successfully")
+    print("Timestamp:", datetime.now())
+
+    # 1. Create table
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS students (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(50),
+            age INT
+        )
+    """)
+    conn.commit()
+    print("\nTable created or already exists.")
+
+    # 2. Insert records
+    cur.execute("INSERT INTO students (name, age) VALUES (%s, %s)", ("Alice", 20))
+    cur.execute("INSERT INTO students (name, age) VALUES (%s, %s)", ("Bob", 22))
+    conn.commit()
+    print("Records inserted.")
+
+    # 3. Read records
+    print("\nStudent Records:")
+    cur.execute("SELECT * FROM students")
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
+
+    # 4. Update record
+    cur.execute("UPDATE students SET age = %s WHERE name = %s", (23, "Bob"))
+    conn.commit()
+    print("\nRecord updated (Bob's age set to 23).")
+
+    # 5. Delete record
+    cur.execute("DELETE FROM students WHERE name = %s", ("Alice",))
+    conn.commit()
+    print("Record deleted (Alice).")
+
+    # 6. Final data
+    print("\nFinal Student Records:")
+    cur.execute("SELECT * FROM students")
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
+
+    # Close connection
+    cur.close()
+    conn.close()
+    print("\nDatabase connection closed.")
+
+except Exception as e:
+    print("Error:", e)
